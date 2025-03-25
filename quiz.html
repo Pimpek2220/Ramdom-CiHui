@@ -3,94 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <title>随机词汇测试</title>
+  <!-- 一样的依赖 -->
   <script src="https://unpkg.com/vue@3"></script>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://unpkg.com/@vueuse/motion"></script>
+  <script src="https://unpkg.com/vue-i18n@9/dist/vue-i18n.global.js"></script>
+  <script src="https://unpkg.com/@vueuse/motion/dist/index.iife.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
 </head>
 
-<body class="bg-gray-50">
-<div id="app" class="container mx-auto mt-10 p-8 shadow rounded-lg text-center">
-  <h2 class="text-2xl font-bold mb-4">🎲 随机词汇测试</h2>
+<body class="bg-gray-100 dark:bg-gray-900 dark:text-white">
+<div id="quizApp" class="container mx-auto mt-10 p-8 shadow rounded-lg text-center bg-white dark:bg-gray-800 dark:text-white">
+
+  <!-- 语言切换 -->
+  <div class="flex gap-2 justify-center mb-4">
+    <button @click="setLang('zh')" class="px-4 py-1 border rounded">中文</button>
+    <button @click="setLang('en')" class="px-4 py-1 border rounded">English</button>
+  </div>
+
+  <!-- 深色模式 -->
+  <button @click="toggleDark" class="px-4 py-1 border border-gray-300 rounded dark:border-gray-600 mb-4">
+    🌙 {{ isDark ? 'Light Mode' : 'Dark Mode' }}
+  </button>
+
+  <h2 class="text-2xl font-bold mb-4">{{ $t('quizTitle') }}</h2>
 
   <div v-if="currentWord">
-    <p class="text-xl mb-4 font-semibold">请翻译：</p>
+    <p class="text-xl mb-4 font-semibold">{{ $t('translatePrompt') }}:</p>
     <p class="text-3xl mb-6">{{ displayWord }}</p>
 
     <input v-model="userAnswer" @keyup.enter="checkAnswer"
-           class="border rounded px-4 py-2 mb-4" placeholder="输入你的翻译" autofocus>
+           class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 mb-4" 
+           :placeholder="$t('yourAnswer')" autofocus>
 
     <div>
-      <button class="bg-blue-500 hover:bg-blue-600 text-white rounded px-6 py-2" @click="checkAnswer">
-        提交答案
+      <button class="bg-blue-500 hover:bg-blue-600 text-white rounded px-6 py-2"
+              @click="checkAnswer">
+        {{ $t('submitAnswer') }}
       </button>
     </div>
   </div>
 
   <div v-else>
-    <p class="mb-4">你还没有记录任何词汇！</p>
-    <a href="index.html" class="text-blue-500 underline">返回记录页面</a>
+    <p class="mb-4">{{ $t('noWords') }}</p>
+    <a href="index.html" class="text-blue-500 underline">{{ $t('backToHome') }}</a>
   </div>
 
-  <div v-if="feedback" class="mt-4 text-lg font-semibold" :class="{'text-green-600': correct, 'text-red-600': !correct}">
+  <div v-if="feedback" class="mt-4 text-lg font-semibold"
+       :class="{'text-green-600': correct, 'text-red-600': !correct}">
     {{ feedback }}
   </div>
 
   <div class="mt-6">
-    <a href="index.html" class="text-gray-500 underline">返回首页</a>
+    <a href="index.html" class="text-gray-500 underline">{{ $t('backToHome') }}</a>
   </div>
 </div>
 
-<script>
-const app = Vue.createApp({
-  data() {
-    return {
-      wordsList: JSON.parse(localStorage.getItem('words')) || [],
-      currentWord: null,
-      testLang: '',
-      answerLang: '',
-      displayWord: '',
-      userAnswer: '',
-      feedback: '',
-      correct: false
-    };
-  },
-  methods: {
-    pickRandomWord() {
-      if (this.wordsList.length === 0) {
-        this.currentWord = null;
-        return;
-      }
-      this.currentWord = this.wordsList[Math.floor(Math.random() * this.wordsList.length)];
-      this.testLang = Math.random() < 0.5 ? 'lang1' : 'lang2';
-      this.answerLang = this.testLang === 'lang1' ? 'lang2' : 'lang1';
-      this.displayWord = this.currentWord[this.testLang];
-    },
-    checkAnswer() {
-      if (!this.userAnswer.trim()) {
-        alert('请输入你的翻译！');
-        return;
-      }
-      if (this.userAnswer.trim().toLowerCase() === this.currentWord[this.answerLang].toLowerCase()) {
-        this.feedback = '✅ 回答正确！';
-        this.correct = true;
-      } else {
-        this.feedback = `❌ 错误，正确答案是：${this.currentWord[this.answerLang]}`;
-        this.correct = false;
-      }
-      setTimeout(() => {
-        this.feedback = '';
-        this.userAnswer = '';
-        this.pickRandomWord();
-      }, 2000); // 两秒后自动继续下个词汇
-    }
-  },
-  mounted() {
-    this.pickRandomWord();
-  }
-});
-
-app.mount('#app');
-</script>
-
+<!-- quiz.js -->
+<script src="quiz.js"></script>
 </body>
 </html>
