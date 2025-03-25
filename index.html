@@ -2,30 +2,17 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>双语言词汇记录和随机测试</title>
-
-  <!-- Vue.js -->
+  <title>主页 - 词汇记录</title>
+  <!-- Vue, i18n, Motion, Tailwind (与之前相同) -->
   <script src="https://unpkg.com/vue@3"></script>
-
-  <!-- Vue I18n -->
   <script src="https://unpkg.com/vue-i18n@9/dist/vue-i18n.global.js"></script>
-
-  <!-- VueUse Motion（正确的全局版本链接，修复报错） -->
   <script src="https://unpkg.com/@vueuse/motion/dist/index.iife.js"></script>
-
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = { darkMode: 'class' }
   </script>
-
-  <!-- 自定义CSS -->
-  <link rel="stylesheet" href="styles.css">
 </head>
-
-
 <body class="bg-gray-100 dark:bg-gray-900 dark:text-white">
-
 <div id="app" class="container mx-auto p-6 max-w-lg text-center shadow rounded-lg mt-10 bg-white dark:bg-gray-800 dark:text-white">
 
   <!-- 语言切换 -->
@@ -34,24 +21,28 @@
     <button @click="setLang('en')" class="px-4 py-1 border rounded">English</button>
   </div>
 
-  <!-- 主题切换 -->
-  <button @click="toggleDark" class="px-4 py-1 border border-gray-300 rounded dark:border-gray-600">
+  <!-- 深色模式 -->
+  <button @click="toggleDark" class="px-4 py-1 border border-gray-300 rounded dark:border-gray-600 mb-4">
     🌙 {{ isDark ? 'Light Mode' : 'Dark Mode' }}
   </button>
 
   <h2 class="text-2xl font-bold mb-4">{{ $t('title') }}</h2>
 
-  <!-- 词汇输入 -->
+  <!-- 输入框 -->
   <div class="flex gap-2 justify-center mb-4">
-    <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2 dark:text-black" v-model="lang1" :placeholder="$t('lang1')">
-    <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2 dark:text-black" v-model="lang2" :placeholder="$t('lang2')" @keyup.enter="saveWord">
+    <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2" 
+           v-model="lang1" :placeholder="$t('lang1')" autofocus>
+    <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2" 
+           v-model="lang2" :placeholder="$t('lang2')" 
+           @keyup.enter="saveWord">
   </div>
 
-  <button class="border border-gray-300 dark:border-gray-600 bg-green-500 hover:bg-green-600 text-white rounded px-6 py-2 mb-4" @click="saveWord">
+  <button class="border border-gray-300 dark:border-gray-600 bg-green-500 hover:bg-green-600 text-white rounded px-6 py-2 mb-4"
+          @click="saveWord">
     {{ $t('save') }}
   </button>
 
-  <!-- 词汇列表 -->
+  <!-- 列表 -->
   <ul>
     <TransitionGroup name="list" tag="div">
       <li v-for="(word, index) in wordsList" :key="word.lang1 + word.lang2"
@@ -64,15 +55,16 @@
     </TransitionGroup>
   </ul>
 
-  <!-- 开始随机模式 -->
+  <!-- 跳转到测试页面 -->
   <a href="quiz.html">
-    <button class="mt-5 bg-blue-500 hover:bg-blue-600 text-white dark:text-white rounded px-6 py-2">
-  🎲 {{ $t('randomStart') }}
-</button>
+    <button class="mt-5 bg-blue-500 hover:bg-blue-600 text-white rounded px-6 py-2">
+      🎲 {{ $t('randomStart') }}
+    </button>
   </a>
 
 </div>
 
+<!-- 主JS -->
 <script src="script.js"></script>
 </body>
 </html>
