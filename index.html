@@ -32,9 +32,17 @@
     </div>
 
     <!-- 主题切换 -->
-    <button @click="toggleDark" class="px-4 py-1 border rounded mb-4">
-      🌙 {{ isDark ? 'Light Mode' : 'Dark Mode' }}
-    </button>
+    <button @click="toggleDark" class="px-4 py-1 border border-gray-300 rounded dark:border-gray-600">
+  🌙 {{ isDark ? 'Light Mode' : 'Dark Mode' }}
+      <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2">
+
+</button>
+    
+    <button class="border border-gray-300 dark:border-gray-600 bg-green-500 hover:bg-green-600 text-white rounded px-6 py-2 mb-4">
+  {{ $t('save') }}
+</button>
+
+
 
     <h2 class="text-2xl font-bold mb-4">{{ $t('title') }}</h2>
 
