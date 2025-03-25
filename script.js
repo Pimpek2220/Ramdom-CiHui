@@ -28,13 +28,17 @@ const app = Vue.createApp({
       const answerLang = testLang === 'lang1' ? 'lang2' : 'lang1';
 
       const userAnswer = prompt(`请翻译：${randomWord[testLang]}`);
-      if (userAnswer === null) return; 
-      
+      if (userAnswer === null) return;
+
       if (userAnswer.trim().toLowerCase() === randomWord[answerLang].toLowerCase()) {
         alert('✅ 正确！');
       } else {
         alert(`❌ 错误！正确答案是：${randomWord[answerLang]}`);
       }
+    },
+    deleteWord(index) {  // 删除功能就在这里（务必加上）
+      this.wordsList.splice(index, 1);
+      localStorage.setItem('words', JSON.stringify(this.wordsList));
     }
   }
 });
