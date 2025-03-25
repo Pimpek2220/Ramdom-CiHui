@@ -16,7 +16,7 @@
       darkMode: 'class'
     }
   </script>
-  
+
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -24,7 +24,7 @@
 
   <!-- Vue 挂载点 -->
   <div id="app" class="container mx-auto p-6 max-w-lg text-center shadow rounded-lg mt-10 bg-white dark:bg-gray-800 dark:text-white">
-    
+
     <!-- 语言切换 -->
     <div class="flex gap-2 justify-center mb-4">
       <button @click="setLang('zh')" class="px-4 py-1 border rounded">中文</button>
@@ -35,7 +35,7 @@
     <button @click="toggleDark" class="px-4 py-1 border border-gray-300 rounded dark:border-gray-600">
       🌙 {{ isDark ? 'Light Mode' : 'Dark Mode' }}
     </button>
-    
+
     <h2 class="text-2xl font-bold mb-4">{{ $t('title') }}</h2>
 
     <!-- 词汇输入 -->
