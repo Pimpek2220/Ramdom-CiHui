@@ -33,26 +33,18 @@
 
     <!-- 主题切换 -->
     <button @click="toggleDark" class="px-4 py-1 border border-gray-300 rounded dark:border-gray-600">
-  🌙 {{ isDark ? 'Light Mode' : 'Dark Mode' }}
-      <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2">
-
-</button>
+      🌙 {{ isDark ? 'Light Mode' : 'Dark Mode' }}
+    </button>
     
-    <button class="border border-gray-300 dark:border-gray-600 bg-green-500 hover:bg-green-600 text-white rounded px-6 py-2 mb-4">
-  {{ $t('save') }}
-</button>
-
-
-
     <h2 class="text-2xl font-bold mb-4">{{ $t('title') }}</h2>
 
     <!-- 词汇输入 -->
     <div class="flex gap-2 justify-center mb-4">
-      <input class="border rounded px-4 py-2 w-1/2" v-model="lang1" :placeholder="$t('lang1')" autofocus>
-      <input class="border rounded px-4 py-2 w-1/2" v-model="lang2" :placeholder="$t('lang2')" @keyup.enter="saveWord">
+      <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2" v-model="lang1" :placeholder="$t('lang1')" autofocus>
+      <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2" v-model="lang2" :placeholder="$t('lang2')" @keyup.enter="saveWord">
     </div>
 
-    <button class="bg-green-500 hover:bg-green-600 text-white rounded px-6 py-2 mb-4" @click="saveWord">
+    <button class="border border-gray-300 dark:border-gray-600 bg-green-500 hover:bg-green-600 text-white rounded px-6 py-2 mb-4" @click="saveWord">
       {{ $t('save') }}
     </button>
 
