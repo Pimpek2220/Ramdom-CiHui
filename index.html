@@ -44,7 +44,7 @@
   <!-- 词汇输入 -->
   <div class="flex gap-2 justify-center mb-4">
     <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2 dark:text-black" v-model="lang1" :placeholder="$t('lang1')">
-    <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2" v-model="lang2" :placeholder="$t('lang2')" @keyup.enter="saveWord">
+    <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2 dark:text-black" v-model="lang2" :placeholder="$t('lang2')" @keyup.enter="saveWord">
   </div>
 
   <button class="border border-gray-300 dark:border-gray-600 bg-green-500 hover:bg-green-600 text-white rounded px-6 py-2 mb-4" @click="saveWord">
