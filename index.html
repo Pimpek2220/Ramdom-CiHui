@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <script src="https://unpkg.com/vue@3"></script>
   <meta charset="UTF-8">
   <title>双语言词汇记录和随机测试</title>
-  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/vue@3"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
+
 <body>
-<div id="app" class="container mx-auto p-5 text-center">
-  <h2 class="text-xl font-bold mb-4">双语言词汇记录</h2>
-  
-  <div class="flex justify-center gap-2 mb-4">
-    <input class="border rounded px-4 py-2" v-model="lang1" placeholder="输入语言一的词汇" autofocus>
-    <input class="border rounded px-4 py-2" v-model="lang2" placeholder="输入语言二的词汇" @keyup.enter="saveWord">
-    <button class="bg-green-500 hover:bg-green-600 text-white rounded px-4 py-2" @click="saveWord">确定</button>
+  <div id="app" class="container mx-auto p-6 max-w-lg text-center shadow rounded-lg mt-10">
+    <h2 class="text-2xl font-bold mb-4">🌐 双语言词汇记录 📚</h2>
+    
+    <div class="flex gap-2 justify-center mb-4">
+      <input class="border rounded px-4 py-2 w-1/2" v-model="lang1" placeholder="输入语言一的词汇" autofocus>
+      <input class="border rounded px-4 py-2 w-1/2" v-model="lang2" placeholder="输入语言二的词汇" @keyup.enter="saveWord">
+    </div>
+
+    <button class="bg-green-500 hover:bg-green-600 text-white rounded px-6 py-2 mb-4" @click="saveWord">
+      确定
+    </button>
+
+    <ul class="text-left mx-auto max-w-md">
+      <li class="border-b py-2" v-for="(word, index) in wordsList" :key="index">
+        {{index+1}}. {{word.lang1}} ↔ {{word.lang2}}
+      </li>
+    </ul>
+
+    <button class="mt-5 bg-blue-500 hover:bg-blue-600 text-white rounded px-6 py-2" @click="randomTest">
+      🎲 开始随机词汇模式
+    </button>
   </div>
 
-  <ul class="text-left mx-auto max-w-sm">
-    <li class="border-b py-1" v-for="(word,index) in wordsList">
-      {{index+1}}. {{word.lang1}} ↔ {{word.lang2}}
-    </li>
-  </ul>
-
-  <button class="mt-5 bg-blue-500 hover:bg-blue-600 text-white rounded px-6 py-2" @click="randomTest">
-    🎲 开始随机词汇模式
-  </button>
-</div>
-  
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
