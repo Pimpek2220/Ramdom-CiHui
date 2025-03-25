@@ -37,12 +37,18 @@ const app = Vue.createApp({
     return {
       lang1: '',
       lang2: '',
-      wordsList: JSON.parse(localStorage.getItem('words')) || []
+      wordsList: JSON.parse(localStorage.getItem('words')) || [],
+      isDark: localStorage.getItem('darkMode') === 'true' // 读取黑暗模式状态
     };
   },
   methods: {
     setLang(lang) {
       i18n.global.locale = lang;
+    },
+    toggleDark() {
+      this.isDark = !this.isDark;
+      document.documentElement.classList.toggle('dark', this.isDark);
+      localStorage.setItem('darkMode', this.isDark); // 记住黑暗模式状态
     },
     saveWord() {
       if (!this.lang1 || !this.lang2) {
@@ -59,7 +65,6 @@ const app = Vue.createApp({
         alert(i18n.global.t('noWords'));
         return;
       }
-
       const randomWord = this.wordsList[Math.floor(Math.random() * this.wordsList.length)];
       const testLang = Math.random() < 0.5 ? 'lang1' : 'lang2';
       const answerLang = testLang === 'lang1' ? 'lang2' : 'lang1';
@@ -76,6 +81,11 @@ const app = Vue.createApp({
     deleteWord(index) {
       this.wordsList.splice(index, 1);
       localStorage.setItem('words', JSON.stringify(this.wordsList));
+    }
+  },
+  mounted() {
+    if (this.isDark) {
+      document.documentElement.classList.add('dark');
     }
   }
 });
