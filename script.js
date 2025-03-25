@@ -39,4 +39,4 @@ const app = Vue.createApp({
   }
 });
 
-app.mount('#app'); // 这里必须和html中的id对应
+app.mount('#app');
