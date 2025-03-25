@@ -3,73 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <title>双语言词汇记录和随机测试</title>
-
-  <!-- 引入 Vue 和 Vue I18n（国际化） -->
   <script src="https://unpkg.com/vue@3"></script>
   <script src="https://unpkg.com/vue-i18n@9/dist/vue-i18n.global.js"></script>
-  <script src="https://unpkg.com/@vueuse/motion"></script>
-
-  <!-- 引入 TailwindCSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
-      darkMode: 'class'
-    }
+    tailwind.config = { darkMode: 'class' }
   </script>
-
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="bg-gray-100 dark:bg-gray-900 dark:text-white">
 
-  <!-- Vue 挂载点 -->
-  <div id="app" class="container mx-auto p-6 max-w-lg text-center shadow rounded-lg mt-10 bg-white dark:bg-gray-800 dark:text-white">
+<div id="app" class="container mx-auto p-6 max-w-lg text-center shadow rounded-lg mt-10 bg-white dark:bg-gray-800 dark:text-white">
 
-    <!-- 语言切换 -->
-    <div class="flex gap-2 justify-center mb-4">
-      <button @click="setLang('zh')" class="px-4 py-1 border rounded">中文</button>
-      <button @click="setLang('en')" class="px-4 py-1 border rounded">English</button>
-    </div>
-
-    <!-- 主题切换 -->
-    <button @click="toggleDark" class="px-4 py-1 border border-gray-300 rounded dark:border-gray-600">
-      🌙 {{ isDark ? 'Light Mode' : 'Dark Mode' }}
-    </button>
-
-    <h2 class="text-2xl font-bold mb-4">{{ $t('title') }}</h2>
-
-    <!-- 词汇输入 -->
-    <div class="flex gap-2 justify-center mb-4">
-      <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2" v-model="lang1" :placeholder="$t('lang1')" autofocus>
-      <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2" v-model="lang2" :placeholder="$t('lang2')" @keyup.enter="saveWord">
-    </div>
-
-    <button class="border border-gray-300 dark:border-gray-600 bg-green-500 hover:bg-green-600 text-white rounded px-6 py-2 mb-4" @click="saveWord">
-      {{ $t('save') }}
-    </button>
-
-    <!-- 词汇列表 -->
-    <ul>
-      <TransitionGroup name="list" tag="div">
-        <li v-for="(word, index) in wordsList" :key="word.lang1 + word.lang2"
-            class="border-b py-2 flex justify-between items-center">
-          <span>{{ index+1 }}. {{ word.lang1 }} ↔ {{ word.lang2 }}</span>
-          <button @click="deleteWord(index)" class="text-red-500 hover:text-red-700">
-            {{ $t('delete') }}
-          </button>
-        </li>
-      </TransitionGroup>
-    </ul>
-
-    <!-- 开始随机模式 -->
-    <a href="quiz.html">
-      <button class="mt-5 bg-blue-500 hover:bg-blue-600 text-white rounded px-6 py-2">
-        🎲 {{ $t('randomStart') }}
-      </button>
-    </a>
-
+  <!-- 语言切换 -->
+  <div class="flex gap-2 justify-center mb-4">
+    <button @click="setLang('zh')" class="px-4 py-1 border rounded">中文</button>
+    <button @click="setLang('en')" class="px-4 py-1 border rounded">English</button>
   </div>
 
-  <script src="script.js"></script>
+  <!-- 主题切换 -->
+  <button @click="toggleDark" class="px-4 py-1 border border-gray-300 rounded dark:border-gray-600">
+    🌙 {{ isDark ? 'Light Mode' : 'Dark Mode' }}
+  </button>
+
+  <h2 class="text-2xl font-bold mb-4">{{ $t('title') }}</h2>
+
+  <!-- 词汇输入 -->
+  <div class="flex gap-2 justify-center mb-4">
+    <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2" v-model="lang1" :placeholder="$t('lang1')" autofocus>
+    <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2" v-model="lang2" :placeholder="$t('lang2')" @keyup.enter="saveWord">
+  </div>
+
+  <button class="border border-gray-300 dark:border-gray-600 bg-green-500 hover:bg-green-600 text-white rounded px-6 py-2 mb-4" @click="saveWord">
+    {{ $t('save') }}
+  </button>
+
+  <!-- 词汇列表 -->
+  <ul>
+    <TransitionGroup name="list" tag="div">
+      <li v-for="(word, index) in wordsList" :key="word.lang1 + word.lang2"
+          class="border-b py-2 flex justify-between items-center">
+        <span>{{ index+1 }}. {{ word.lang1 }} ↔ {{ word.lang2 }}</span>
+        <button @click="deleteWord(index)" class="text-red-500 hover:text-red-700">
+          {{ $t('delete') }}
+        </button>
+      </li>
+    </TransitionGroup>
+  </ul>
+
+  <!-- 开始随机模式 -->
+  <a href="quiz.html">
+    <button class="mt-5 bg-blue-500 hover:bg-blue-600 text-white rounded px-6 py-2">
+      🎲 {{ $t('randomStart') }}
+    </button>
+  </a>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
