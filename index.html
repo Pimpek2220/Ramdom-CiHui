@@ -46,15 +46,15 @@
 </button>
 
 <ul>
-  <li v-for="(word, index) in wordsList" :key="index" v-motion
-      :initial="{ opacity: 0, x: -10 }"
-      :enter="{ opacity: 1, x: 0, transition: { delay: index * 100 } }"
-      :leave="{ opacity: 0, x: 50, transition: { duration: 300 } }"
-      class="border-b py-2 flex justify-between items-center">
-    <span>{{index+1}}. {{word.lang1}} ↔ {{word.lang2}}</span>
-    <button @click="deleteWord(index)" class="text-red-500 hover:text-red-700">删除</button>
-  </li>
+  <TransitionGroup name="list" tag="div">
+    <li v-for="(word, index) in wordsList" :key="word.lang1 + word.lang2"
+        class="border-b py-2 flex justify-between items-center">
+      <span>{{index+1}}. {{word.lang1}} ↔ {{word.lang2}}</span>
+      <button @click="deleteWord(index)" class="text-red-500 hover:text-red-700">删除</button>
+    </li>
+  </TransitionGroup>
 </ul>
+
 <!-- 原来的随机模式按钮 -->
 <a href="quiz.html">
   <button class="mt-5 bg-blue-500 hover:bg-blue-600 text-white rounded px-6 py-2">
