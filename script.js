@@ -38,7 +38,7 @@ const app = Vue.createApp({
       lang1: '',
       lang2: '',
       wordsList: JSON.parse(localStorage.getItem('words')) || [],
-      isDark: localStorage.getItem('darkMode') === 'true' // 读取黑暗模式状态
+      isDark: localStorage.getItem('darkMode') === 'true'
     };
   },
   methods: {
@@ -52,7 +52,7 @@ const app = Vue.createApp({
       } else {
         document.documentElement.classList.remove('dark');
       }
-      localStorage.setItem('darkMode', this.isDark); // 记住用户选择
+      localStorage.setItem('darkMode', this.isDark);
     },
     saveWord() {
       if (!this.lang1 || !this.lang2) {
