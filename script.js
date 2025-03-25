@@ -46,10 +46,15 @@ const app = Vue.createApp({
       i18n.global.locale = lang;
     },
     toggleDark() {
-      this.isDark = !this.isDark;
-      document.documentElement.classList.toggle('dark', this.isDark);
-      localStorage.setItem('darkMode', this.isDark); // 记住黑暗模式状态
-    },
+  this.isDark = !this.isDark;
+  if (this.isDark) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+  localStorage.setItem('darkMode', this.isDark); // 记住用户选择
+}
+
     saveWord() {
       if (!this.lang1 || !this.lang2) {
         alert(i18n.global.t('inputPrompt'));
@@ -84,10 +89,12 @@ const app = Vue.createApp({
     }
   },
   mounted() {
-    if (this.isDark) {
-      document.documentElement.classList.add('dark');
-    }
+  this.isDark = localStorage.getItem('darkMode') === 'true';
+  if (this.isDark) {
+    document.documentElement.classList.add('dark');
   }
+}
+
 });
 
 app.use(i18n);
