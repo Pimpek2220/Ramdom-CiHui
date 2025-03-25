@@ -3,11 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>双语言词汇记录和随机测试</title>
+
   <script src="https://unpkg.com/vue-i18n@9/dist/vue-i18n.global.js"></script>
   <script src="https://unpkg.com/vue@3"></script>
   <script src="https://unpkg.com/@vueuse/motion"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class'
+  }
+</script>
+
 </head>
   <!-- 语言切换按钮 -->
 <div class="flex gap-2 justify-center mb-4">
@@ -44,6 +52,25 @@
            class="border rounded px-4 py-2 w-1/2 transition duration-200"
            v-model="lang2" placeholder="输入语言二的词汇" @keyup.enter="saveWord">
   </div>
+
+  <h2>{{ $t('title') }}</h2>
+<input v-model="lang1" :placeholder="$t('lang1')">
+<input v-model="lang2" :placeholder="$t('lang2')">
+<button @click="saveWord">{{ $t('save') }}</button>
+
+<button @click="randomTest">{{ $t('randomStart') }}</button>
+
+<button @click="deleteWord(index)">{{ $t('delete') }}</button>
+  
+  <div id="app" class="container mx-auto p-6 max-w-lg text-center shadow rounded-lg mt-10 bg-white dark:bg-gray-800 dark:text-white">
+
+<button class="bg-green-500 hover:bg-green-600 text-white dark:bg-green-700 dark:hover:bg-green-600 rounded px-6 py-2 mb-4">
+
+  
+  <button @click="toggleDark" class="px-4 py-1 border rounded">
+  🌙 Dark Mode
+</button>
+
 
   <button v-motion="{
             initial:{scale:1},
