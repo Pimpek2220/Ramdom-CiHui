@@ -4,19 +4,24 @@
   <meta charset="UTF-8">
   <title>双语言词汇记录和随机测试</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/vue@3"></script>
 </head>
 <body>
-  <div class="container">
-    <h2>双语言词汇记录</h2>
-    <input type="text" id="lang1" placeholder="输入语言一的词汇">
-    <input type="text" id="lang2" placeholder="输入语言二的词汇">
-    <button id="save-btn">确定</button>
+<div id="app">
+  <h2>双语言词汇记录</h2>
+  <input v-model="lang1" placeholder="输入语言一的词汇">
+  <input v-model="lang2" placeholder="输入语言二的词汇">
+  <button @click="saveWord">确定</button>
 
-    <ul id="wordList"></ul>
+  <ul>
+    <li v-for="(word,index) in wordsList" :key="index">
+      {{index+1}}. {{word.lang1}} ↔ {{word.lang2}}
+    </li>
+  </ul>
 
-    <button id="start-btn" class="start-btn">🎲 开始随机词汇模式</button>
-  </div>
+  <button @click="randomTest" class="start-btn">🎲 开始随机词汇模式</button>
+</div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
