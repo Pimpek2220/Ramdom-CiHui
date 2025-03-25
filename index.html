@@ -43,7 +43,7 @@
 
   <!-- 词汇输入 -->
   <div class="flex gap-2 justify-center mb-4">
-    <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2" v-model="lang1" :placeholder="$t('lang1')" autofocus>
+    <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2 dark:text-black" v-model="lang1" :placeholder="$t('lang1')">
     <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2" v-model="lang2" :placeholder="$t('lang2')" @keyup.enter="saveWord">
   </div>
 
@@ -68,8 +68,6 @@
   <a href="quiz.html">
     <button class="mt-5 bg-blue-500 hover:bg-blue-600 text-white dark:text-white rounded px-6 py-2">
   🎲 {{ $t('randomStart') }}
-      <input class="border border-gray-300 dark:border-gray-600 rounded px-4 py-2 w-1/2 dark:text-black" v-model="lang1" :placeholder="$t('lang1')">
-
 </button>
   </a>
 
