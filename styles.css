@@ -56,11 +56,5 @@ ul li {
   background-color: #007bb5;
 }
 
-/* 词汇列表删除时的动画效果 */
-.list-enter-active, .list-leave-active {
-  transition: all 0.4s ease;
-}
-.list-enter-from, .list-leave-to {
-  opacity: 0;
-  transform: translateX(20px);
-}
+.list-enter-active, .list-leave-active { transition: all 0.4s ease; }
+.list-enter-from, .list-leave-to { opacity: 0; transform: translateX(20px); }
