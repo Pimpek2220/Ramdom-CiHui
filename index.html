@@ -11,27 +11,35 @@
 <body>
   <div id="app" class="container mx-auto p-6 max-w-lg text-center shadow rounded-lg mt-10">
     <h2 v-motion
-    :initial="{ opacity: 0, y: -30 }"
-    :enter="{ opacity: 1, y: 0, transition: { duration: 500 } }"
+    :initial="{ rotate: -2 }"
+    :enter="{ rotate: 0, transition: { duration: 500, type: 'spring', stiffness: 100 } }"
     class="text-2xl font-bold mb-4">
   🌐 双语言词汇记录 📚
 </h2>
 
+</h2>
+
 <div class="flex gap-2 justify-center mb-4">
   <input v-motion
-         :initial="{ opacity: 0, x: -50 }"
-         :enter="{ opacity: 1, x: 0, transition: { delay: 200, duration: 500 } }"
-         class="border rounded px-4 py-2 w-1/2" v-model="lang1" placeholder="输入语言一的词汇">
+       :initial="{ scale: 1 }"
+       :hovered="{ scale: 1.03 }"
+       :focused="{ scale: 1.05, backgroundColor: '#e0f2fe' }"
+       class="border rounded px-4 py-2 w-1/2 transition duration-200"
+       v-model="lang1" placeholder="输入语言一的词汇" autofocus>
 
-  <input v-motion
-         :initial="{ opacity: 0, x: 50 }"
-         :enter="{ opacity: 1, x: 0, transition: { delay: 200, duration: 500 } }"
-         class="border rounded px-4 py-2 w-1/2" v-model="lang2" placeholder="输入语言二的词汇">
+<input v-motion
+       :initial="{ scale: 1 }"
+       :hovered="{ scale: 1.03 }"
+       :focused="{ scale: 1.05, backgroundColor: '#e0f2fe' }"
+       class="border rounded px-4 py-2 w-1/2 transition duration-200"
+       v-model="lang2" placeholder="输入语言二的词汇" @keyup.enter="saveWord">
+
 </div>
 
 <button v-motion
-        :initial="{ scale: 0 }"
-        :enter="{ scale: 1, transition: { delay: 400, duration: 500 } }"
+        :initial="{ scale: 1 }"
+        :hovered="{ scale: 1.05 }"
+        :pressed="{ scale: 0.9 }"
         class="bg-green-500 hover:bg-green-600 text-white rounded px-6 py-2 mb-4"
         @click="saveWord">
   确定
@@ -39,16 +47,18 @@
 
 <ul>
   <li v-for="(word, index) in wordsList" :key="index" v-motion
-      :initial="{ opacity: 0 }"
-      :enter="{ opacity: 1, transition: { delay: index * 100 } }"
-      class="border-b py-2">
-    {{index+1}}. {{word.lang1}} ↔ {{word.lang2}}
+      :initial="{ opacity: 0, x: -10 }"
+      :enter="{ opacity: 1, x: 0, transition: { delay: index * 100 } }"
+      :leave="{ opacity: 0, x: 50, transition: { duration: 300 } }"
+      class="border-b py-2 flex justify-between items-center">
+    <span>{{index+1}}. {{word.lang1}} ↔ {{word.lang2}}</span>
+    <button @click="deleteWord(index)" class="text-red-500 hover:text-red-700">删除</button>
   </li>
 </ul>
-
 <button v-motion
-        :initial="{ opacity: 0 }"
-        :enter="{ opacity: 1, transition: { delay: 600, duration: 500 } }"
+        :initial="{ scale: 1 }"
+        :hovered="{ scale: 1.05 }"
+        :pressed="{ scale: 0.9 }"
         class="mt-5 bg-blue-500 hover:bg-blue-600 text-white rounded px-6 py-2"
         @click="randomTest">
   🎲 开始随机词汇模式
